@@ -20,6 +20,15 @@ app.get('/health', (req, res) => {
 app.use("/api/v1", mainRouter);
 app.use("/api/v1/check-in", checkInRouter);
 
+// Serve frontend build in production
+if (process.env.NODE_ENV === 'production') {
+    const path = require('path');
+    app.use(express.static(path.join(__dirname, 'client', 'dist')));
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+    });
+}
+
 const port = process.env.PORT || 3000;
 
 const start = async () => {

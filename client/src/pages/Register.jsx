@@ -7,6 +7,7 @@ import { FaEyeSlash } from "react-icons/fa6";
 import "../styles/Register.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_BASE } from '../config/api';
 import { toast } from "react-toastify";
 
 
@@ -35,7 +36,7 @@ const Login = () => {
           password
         };
         try{
-        const response = await axios.post("http://localhost:3000/api/v1/register", formData);
+        const response = await axios.post(`${API_BASE}/api/v1/register`, formData);
          toast.success("Registration successfull");
          navigate("/login");
        }catch(err){

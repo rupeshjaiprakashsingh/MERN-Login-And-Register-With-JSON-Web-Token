@@ -3,6 +3,7 @@ import "../styles/Dashboard.css";
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import { API_BASE } from '../config/api';
 
 const Dashboard = () => {
   const [ token, setToken ] = useState(JSON.parse(localStorage.getItem("auth")) || "");
@@ -18,7 +19,7 @@ const Dashboard = () => {
     };
 
     try {
-      const response = await axios.get("http://localhost:3000/api/v1/dashboard", axiosConfig);
+      const response = await axios.get(`${API_BASE}/api/v1/dashboard`, axiosConfig);
       setData({ msg: response.data.msg, luckyNumber: response.data.secret });
     } catch (error) {
       toast.error(error.message);
