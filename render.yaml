@@ -1,0 +1,20 @@
+# Render service definition for this repository. Edit environment variables on Render's dashboard.
+# This config defines a single Web Service that builds the frontend (client) and starts the backend (app.js).
+# You can also split frontend/backend into two Render services if you prefer.
+services:
+  - type: web
+    name: mern-auth-backend
+    env: node
+    plan: free
+    repo: https://github.com/rupeshjaiprakashsingh/MERN-Login-And-Register-With-JSON-Web-Token
+    branch: main
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: '3000' # change on Render dashboard to the port Render provides (usually not needed)
+      - key: MONGO_URI
+        fromDatabase: null
+      - key: JWT_SECRET
+        fromDatabase: null
+    autoDeploy: true
